@@ -1,3 +1,5 @@
+"use-client"
+
 import React, { useEffect, useState, useRef } from "react";
 import spa from "../../../public/images/spa.png";
 import training from "../../../public/images/training.png";
