@@ -14,6 +14,53 @@ import calendar3 from "../../../public/images/calendar3.png";
 import calendar1 from "../../../public/images/calendar1.png";
 import schedule from "../../../public/images/schedule.png";
 import calendarSchedule from "../../../public/images/calendar-schedule-list.jpg";
+
+
+const items = [
+  {
+    id: 1,
+    image: event,
+    title: "Manage Events and Meetings",
+    description:
+      "Excel hurts your eyes? Too posh for so many papers? Set up your events and meetings with Calendive’s simple UI, made for you.",
+  },
+  {
+    id: 3,
+    image: spa,
+    title: "Easy Scheduling",
+    description:
+      "Manage meetings, interviews, training sessions, and client calls all in one place.",
+  },
+  {
+    id: 5,
+    image: hr,
+    title: "Flawless Integrations",
+    description:
+      "Connect your existing calendars to Calendive for a smooth workflow.",
+  },
+  {
+    id: 7,
+    image: training,
+    title: "Never Miss a Beat",
+    description:
+      "Calendive sends you notifications and reminders before appointments and automates follow-up emails.",
+  },
+  {
+    id: 9,
+    image: sales,
+    title: "Sell on Your Schedule",
+    description:
+      "Calendive allows you to accept direct online payments for services and digital products.",
+  },
+  {
+    id: 11,
+    image: consulting,
+    title: "CRM Powerhouse",
+    description:
+      "Simplify your workflows, manage leads, and build strong customer relationships.",
+  },
+];
+
 const WhoWeServe = () => {
   const [index, setIndex] = useState(1);
   const indexRef = useRef(index);
@@ -22,66 +69,39 @@ const WhoWeServe = () => {
     indexRef.current = index;
   }, [index]);
 
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setIndex((prev) => {
+  //       const newIndex = prev <= 11 ? prev + 1 : 1;
+  //       indexRef.current = newIndex;
+  //       return newIndex;
+  //     });
+  //   }, 4000);
+
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  
+
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setIndex((prev) => {
-        const newIndex = prev <= 11 ? prev + 1 : 1;
-        indexRef.current = newIndex;
-        return newIndex;
+      requestAnimationFrame(() => {
+        setIndex((prev) => {
+          const newIndex = prev <= 11 ? prev + 1 : 1;
+          return newIndex;
+        });
       });
     }, 4000);
-
+  
     return () => clearInterval(intervalId);
   }, []);
+  
 
   const openTabHandler = (id: number) => {
     setIndex(id);
   };
 
-  const items = [
-    {
-      id: 1,
-      image: event,
-      title: "Manage Events and Meetings",
-      description:
-        "Excel hurts your eyes? Too posh for so many papers? Set up your events and meetings with Calendive’s simple UI, made for you.",
-    },
-    {
-      id: 3,
-      image: spa,
-      title: "Easy Scheduling",
-      description:
-        "Manage meetings, interviews, training sessions, and client calls all in one place.",
-    },
-    {
-      id: 5,
-      image: hr,
-      title: "Flawless Integrations",
-      description:
-        "Connect your existing calendars to Calendive for a smooth workflow.",
-    },
-    {
-      id: 7,
-      image: training,
-      title: "Never Miss a Beat",
-      description:
-        "Calendive sends you notifications and reminders before appointments and automates follow-up emails.",
-    },
-    {
-      id: 9,
-      image: sales,
-      title: "Sell on Your Schedule",
-      description:
-        "Calendive allows you to accept direct online payments for services and digital products.",
-    },
-    {
-      id: 11,
-      image: consulting,
-      title: "CRM Powerhouse",
-      description:
-        "Simplify your workflows, manage leads, and build strong customer relationships.",
-    },
-  ];
+  
 
   return (
     <div className="px-16 mb-24">
@@ -173,6 +193,7 @@ const WhoWeServe = () => {
                 items.find((item) => item.id === index)?.title || "Loading..."
               } 
               priority
+              loading="eager"
               className={`bottom-0 rounded-tl-[10px] rounded-tr-[10px] ${
                 index === 7 || index === 9 || index === 11 ? "hidden" : "block"
               }`}
