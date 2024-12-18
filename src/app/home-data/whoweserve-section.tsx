@@ -1,4 +1,4 @@
-"use-client"
+"use-client";
 
 import React, { useEffect, useState, useRef } from "react";
 import spa from "../../../public/images/spa.png";
@@ -18,7 +18,6 @@ const WhoWeServe = () => {
   const [index, setIndex] = useState(1);
   const indexRef = useRef(index);
 
-
   useEffect(() => {
     indexRef.current = index;
   }, [index]);
@@ -36,9 +35,8 @@ const WhoWeServe = () => {
   }, []);
 
   const openTabHandler = (id: number) => {
-    setIndex(id)
-  }
-
+    setIndex(id);
+  };
 
   const items = [
     {
@@ -97,7 +95,7 @@ const WhoWeServe = () => {
               <li
                 key={item.id}
                 className={`transition-opacity duration-1000 ${
-                  index === item.id ? "opacity-100" : "opacity-10" 
+                  index === item.id ? "opacity-100" : "opacity-10"
                 } cursor-pointer`}
                 onClick={() => openTabHandler(item.id)}
               >
@@ -125,7 +123,9 @@ const WhoWeServe = () => {
                     {item.title}
                   </span>
                 </h1>
-                <p className={`${index === item.id ? "block" : "hidden"} my-6`}>{item.description}</p>
+                <p className={`${index === item.id ? "block" : "hidden"} my-6`}>
+                  {item.description}
+                </p>
                 <div className="relative w-full my-4">
                   <hr
                     className={`border-t border-transparent w-full h-[2px] ${
@@ -152,16 +152,14 @@ const WhoWeServe = () => {
           </ul>
         </div>
         <div className="secondTab mt-12">
-          <div
-            className={` background-anim`}
-          >
+          <div className={` background-anim`}>
             <div className="moving-object"></div>
             <div className="moving-object"></div>
             <div className="moving-object"></div>
             <div className="moving-object"></div>
           </div>
           <div className="flex items-center">
-             <Image
+            <Image
               src={
                 index === 1
                   ? calendar2
@@ -171,9 +169,14 @@ const WhoWeServe = () => {
                   ? schedule
                   : ""
               }
-              alt="service-image"
-              className={`bottom-0 rounded-tl-[10px] rounded-tr-[10px] ${index === 7 || index === 9 || index === 11 ? "hidden" : "block"}`}
-            /> 
+              alt={
+                items.find((item) => item.id === index)?.title || "Loading..."
+              } 
+              priority
+              className={`bottom-0 rounded-tl-[10px] rounded-tr-[10px] ${
+                index === 7 || index === 9 || index === 11 ? "hidden" : "block"
+              }`}
+            />
           </div>
         </div>
       </div>
